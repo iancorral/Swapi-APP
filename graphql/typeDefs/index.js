@@ -1,3 +1,4 @@
+// graphql/typeDefs/index.js
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
@@ -45,6 +46,10 @@ const typeDefs = gql`
     precio: Float
   }
 
+  type AuthPayload {
+    token: String!
+  }
+
   type Query {
     sp_UsuAnu(uid: Int!): [UsuarioAnuncio!]!
     sp_CatAnu: [CategoriaAnuncio!]!
@@ -52,20 +57,19 @@ const typeDefs = gql`
     categorias: [Categoria!]!
     anuncios: [Anuncio!]!
     imagenes: [Imagen!]!
+    perfilUsuario: Usuario!
   }
 
   type Mutation {
-    # Usuarios
     addUsuario(nombre: String!, correo: String!, contrasena: String!): Usuario!
+    login(correo: String!, contrasena: String!): AuthPayload!
     updateUsuario(id_usuario: ID!, nombre: String): Usuario!
     deleteUsuario(id_usuario: ID!): Int!
 
-    # Categorias
     addCategoria(nombre: String!): Categoria!
     updateCategoria(id_categoria: ID!, nombre: String): Categoria!
     deleteCategoria(id_categoria: ID!): Int!
 
-    # Anuncios
     addAnuncio(titulo: String!, descripcion: String!, precio: Float, id_usuario: Int!, id_categoria: Int!): Anuncio!
     updateAnuncio(id_anuncio: ID!, titulo: String, descripcion: String, precio: Float, id_categoria: Int): Anuncio!
     deleteAnuncio(id_anuncio: ID!): Int!
