@@ -1,4 +1,7 @@
+// graphql/resolvers/index.js
 const db = require('../../database/db');
+const bcrypt = require('bcryptjs');
+const { generateToken } = require('../../auth');
 
 const resolvers = {
   Query: {
@@ -17,26 +20,50 @@ const resolvers = {
     usuarios: async () => await db.select().table('usuarios'),
     categorias: async () => await db.select().table('categorias'),
     anuncios: async () => await db.select().table('anuncios'),
-    imagenes: async () => await db.select().table('imagenes')
+    imagenes: async () => await db.select().table('imagenes'),
+
+    // Perfil del usuario autenticado
+    perfilUsuario: async (_, __, context) => {
+      if (!context.user) throw new Error('No autenticado');
+      return await db('usuarios').where({ id_usuario: context.user.id_usuario }).first();
+    }
   },
 
   Mutation: {
     // --- Usuarios ---
     addUsuario: async (_, { nombre, correo, contrasena }) => {
+      const hashedPassword = await bcrypt.hash(contrasena, 10);
       const [id_usuario] = await db('usuarios').insert({
         nombre,
         correo,
-        contraseña: contrasena
+        contraseña: hashedPassword
       });
       return await db('usuarios').where({ id_usuario }).first();
     },
 
-    updateUsuario: async (_, { id_usuario, nombre }) => {
+    login: async (_, { correo, contrasena }) => {
+      const user = await db('usuarios').where({ correo }).first();
+      if (!user) throw new Error('Correo no encontrado');
+
+      const valid = await bcrypt.compare(contrasena, user.contraseña);
+      if (!valid) throw new Error('Contraseña incorrecta');
+
+      const token = generateToken(user);
+      return { token };
+    },
+
+    updateUsuario: async (_, { id_usuario, nombre }, context) => {
+      if (!context.user || context.user.id_usuario !== parseInt(id_usuario)) {
+        throw new Error("Acceso no autorizado");
+      }
       await db('usuarios').where({ id_usuario }).update({ nombre });
       return await db('usuarios').where({ id_usuario }).first();
     },
 
-    deleteUsuario: async (_, { id_usuario }) => {
+    deleteUsuario: async (_, { id_usuario }, context) => {
+      if (!context.user || context.user.id_usuario !== parseInt(id_usuario)) {
+        throw new Error("Acceso no autorizado");
+      }
       return await db('usuarios').where({ id_usuario }).del();
     },
 
@@ -57,6 +84,15 @@ const resolvers = {
 
     // --- Anuncios ---
     addAnuncio: async (_, { titulo, descripcion, precio, id_usuario, id_categoria }) => {
+      const palabrasProhibidas = ['sexo', 'drogas', 'suicidio'];
+      for (const palabra of palabrasProhibidas) {
+        if (descripcion.toLowerCase().includes(palabra)) {
+          throw new Error("La descripción contiene palabras no permitidas");
+        }
+      }
+      if (descripcion.length < 15) {
+        throw new Error("La descripción debe tener al menos 15 caracteres");
+      }
       const [id_anuncio] = await db('anuncios').insert({
         titulo,
         descripcion,
