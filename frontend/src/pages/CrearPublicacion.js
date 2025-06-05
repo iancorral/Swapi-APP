@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation, useQuery } from '@apollo/client';
 import { jwtDecode } from 'jwt-decode';
+import { useNavigate } from 'react-router-dom';
 
 const ADD_ANUNCIO = gql`
   mutation AddAnuncio(
@@ -39,6 +40,7 @@ function CrearPublicacion() {
   const [id_categoria, setCategoria] = useState('');
 
   const { loading, error, data } = useQuery(GET_CATEGORIAS);
+  const navigate = useNavigate();
 
   const token = localStorage.getItem('token');
   let id_usuario = null;
@@ -76,22 +78,19 @@ function CrearPublicacion() {
         },
       });
       alert(`¡Anuncio creado! ID: ${data.addAnuncio.id_anuncio}`);
-      setTitulo('');
-      setDescripcion('');
-      setPrecio('');
-      setCategoria('');
+      navigate('/anuncios', { state: { nuevo: true } });
     } catch (err) {
       alert(err.message);
     }
   };
 
   if (!token || !id_usuario) {
-    return <p>No autorizado. Inicia sesión para crear una publicación.</p>;
+    return <p style={{ textAlign: 'center', marginTop: '100px' }}>No autorizado. Inicia sesión para crear una publicación.</p>;
   }
 
   return (
-    <div>
-      <h2>Crear Publicación</h2>
+    <div style={{ maxWidth: '500px', margin: '80px auto', padding: '20px', border: '1px solid #ccc', borderRadius: '10px' }}>
+      <h2 style={{ textAlign: 'center' }}>Crear Publicación</h2>
       <form onSubmit={handleSubmit}>
         <input
           type="text"
@@ -99,26 +98,29 @@ function CrearPublicacion() {
           value={titulo}
           onChange={(e) => setTitulo(e.target.value)}
           required
-        /><br/>
+          style={inputStyle}
+        />
         <textarea
           placeholder="Descripción"
           value={descripcion}
           onChange={(e) => setDescripcion(e.target.value)}
           required
-        /><br/>
+          rows={4}
+          style={{ ...inputStyle, resize: 'vertical' }}
+        />
         <input
           type="number"
           placeholder="Precio"
           value={precio}
           onChange={(e) => setPrecio(e.target.value)}
-        /><br/>
-
+          style={inputStyle}
+        />
         {loading ? (
           <p>Cargando categorías...</p>
         ) : error ? (
           <p>Error al cargar categorías</p>
         ) : (
-          <select value={id_categoria} onChange={(e) => setCategoria(e.target.value)} required>
+          <select value={id_categoria} onChange={(e) => setCategoria(e.target.value)} required style={inputStyle}>
             <option value="">Selecciona una categoría</option>
             {data.categorias.map((cat) => (
               <option key={cat.id_categoria} value={cat.id_categoria}>
@@ -127,12 +129,31 @@ function CrearPublicacion() {
             ))}
           </select>
         )}
-        <br/>
-
-        <button type="submit">Publicar</button>
+        <button type="submit" style={buttonStyle}>Publicar</button>
       </form>
     </div>
   );
 }
+
+const inputStyle = {
+  display: 'block',
+  width: '100%',
+  marginBottom: '15px',
+  padding: '10px',
+  fontSize: '16px',
+  borderRadius: '5px',
+  border: '1px solid #ccc'
+};
+
+const buttonStyle = {
+  width: '100%',
+  padding: '12px',
+  backgroundColor: '#5996bd',
+  color: 'white',
+  fontSize: '16px',
+  border: 'none',
+  borderRadius: '5px',
+  cursor: 'pointer'
+};
 
 export default CrearPublicacion;

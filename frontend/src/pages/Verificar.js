@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import '../styles/layout.css';
 
 const VERIFY_CODE = gql`
   mutation VerificarCodigo($correo: String!, $codigo: String!) {
@@ -36,7 +37,7 @@ function VerifyCode() {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Verificar Código</h2>
       <form onSubmit={handleVerificar}>
         <input

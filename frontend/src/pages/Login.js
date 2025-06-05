@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import '../styles/layout.css';
 
 const LOGIN_MUTATION = gql`
   mutation Login($correo: String!, $contrasena: String!) {
@@ -22,16 +23,16 @@ function Login() {
       const { data } = await login({ variables: { correo, contrasena } });
       localStorage.setItem('token', data.login.token);
       alert('¡Login exitoso!');
-      navigate('/crear-publicacion'); // Puedes cambiar esta ruta si gustas
+      navigate('/anuncios');
     } catch (error) {
       alert(error.message);
     }
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Iniciar Sesión</h2>
-      <form onSubmit={handleLogin}>
+      <form className="form-box" onSubmit={handleLogin}>
         <input
           type="email"
           placeholder="Correo institucional"

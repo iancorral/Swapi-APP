@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { gql, useMutation } from '@apollo/client';
 import { useNavigate } from 'react-router-dom';
+import '../styles/layout.css';
 
 const ADD_USUARIO = gql`
   mutation AddUsuario($nombre: String!, $correo: String!, $contrasena: String!) {
@@ -31,7 +32,7 @@ function Register() {
   };
 
   return (
-    <div>
+    <div className="page-container">
       <h2>Registro</h2>
       <form onSubmit={handleRegister}>
         <input
