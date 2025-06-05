@@ -1,4 +1,3 @@
-// graphql/typeDefs/index.js
 const { gql } = require('apollo-server');
 
 const typeDefs = gql`
@@ -73,6 +72,8 @@ const typeDefs = gql`
     addAnuncio(titulo: String!, descripcion: String!, precio: Float, id_usuario: Int!, id_categoria: Int!): Anuncio!
     updateAnuncio(id_anuncio: ID!, titulo: String, descripcion: String, precio: Float, id_categoria: Int): Anuncio!
     deleteAnuncio(id_anuncio: ID!): Int!
+
+    verificarCodigo(correo: String!, codigo: String!): String!
   }
 `;
 
