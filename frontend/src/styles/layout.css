@@ -1,3 +1,4 @@
+/* Centra todo el contenido en pantalla */
 .page-container {
   display: flex;
   justify-content: center;
@@ -8,6 +9,7 @@
   box-sizing: border-box;
 }
 
+/* Caja del formulario o contenido con diseño atractivo */
 .form-box,
 .boxed-container {
   background-color: white;
@@ -20,11 +22,13 @@
   box-sizing: border-box;
 }
 
+/* Asegura que todos los elementos respeten box-sizing */
 .form-box *,
 .boxed-container * {
   box-sizing: border-box;
 }
 
+/* Inputs, selects y textareas con diseño consistente */
 .form-box input,
 .form-box textarea,
 .form-box select,
@@ -51,6 +55,7 @@
   outline: none;
 }
 
+/* Botones con estilo moderno */
 .form-box button,
 .boxed-container button {
   width: 100%;
@@ -76,6 +81,7 @@
   transform: translateY(0);
 }
 
+/* Mensaje de éxito bonito */
 .success-message {
   background-color: #dff0d8;
   color: #3c763d;
