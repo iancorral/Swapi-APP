@@ -15,7 +15,7 @@ const sendVerificationEmail = async (correo, codigo) => {
     subject: 'Código de verificación Swapi',
     text: `Tu código de verificación es: ${codigo}`,
     html: `
-      <h2>Bienvenido a Swapi</h2>
+      <h2>Bienvenido a nuestra app escolar Swapi</h2>
       <p>Tu código de verificación es:</p>
       <h3 style="color:#007bff">${codigo}</h3>
     `
