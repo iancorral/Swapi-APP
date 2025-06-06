@@ -1,7 +1,6 @@
-/* Contenedor principal */
+/* Centra todo el contenido en pantalla */
 .page-container {
   display: flex;
-  flex-direction: column;
   justify-content: center;
   align-items: center;
   min-height: 100vh;
@@ -10,26 +9,26 @@
   box-sizing: border-box;
 }
 
-/* Caja general con sombra y borde */
+/* Caja del formulario o contenido con diseño atractivo */
 .form-box,
 .boxed-container {
   background-color: white;
   padding: 2rem;
-  border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  border-radius: 16px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
   max-width: 400px;
   width: 100%;
   margin: 0 auto;
   box-sizing: border-box;
 }
 
-/* Todos los hijos deben heredar box-sizing para evitar errores de padding */
+/* Asegura que todos los elementos respeten box-sizing */
 .form-box *,
 .boxed-container * {
   box-sizing: border-box;
 }
 
-/* Campos de entrada */
+/* Inputs, selects y textareas con diseño consistente */
 .form-box input,
 .form-box textarea,
 .form-box select,
@@ -38,41 +37,58 @@
 .boxed-container select {
   width: 100%;
   padding: 0.75rem;
-  margin-bottom: 0.75rem;
+  margin-bottom: 1rem;
   border: 1px solid #ccc;
-  border-radius: 8px;
+  border-radius: 10px;
   font-size: 16px;
   display: block;
+  transition: border-color 0.2s ease;
 }
 
-/* Botones uniformes */
+.form-box input:focus,
+.form-box textarea:focus,
+.form-box select:focus,
+.boxed-container input:focus,
+.boxed-container textarea:focus,
+.boxed-container select:focus {
+  border-color: #5996bd;
+  outline: none;
+}
+
+/* Botones con estilo moderno */
 .form-box button,
 .boxed-container button {
   width: 100%;
-  padding: 0.75rem;
-  margin-top: 1rem;
+  padding: 0.85rem;
   background-color: #5996bd;
   color: white;
   border: none;
-  border-radius: 8px;
+  border-radius: 12px;
+  font-size: 17px;
+  font-weight: 500;
   cursor: pointer;
-  font-size: 16px;
-  transition: background-color 0.3s ease;
+  transition: background-color 0.3s ease, transform 0.1s ease;
 }
 
-/* Hover efecto */
 .form-box button:hover,
 .boxed-container button:hover {
   background-color: #41749b;
+  transform: translateY(-1px);
 }
 
-/* Mensaje de éxito */
+.form-box button:active,
+.boxed-container button:active {
+  transform: translateY(0);
+}
+
+/* Mensaje de éxito bonito */
 .success-message {
   background-color: #dff0d8;
   color: #3c763d;
   padding: 10px;
-  border-radius: 5px;
+  border-radius: 8px;
   margin-bottom: 15px;
   border: 1px solid #d6e9c6;
   text-align: center;
+  font-weight: 500;
 }
