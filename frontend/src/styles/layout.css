@@ -1,4 +1,16 @@
-/* Asegura simetría perfecta */
+/* Contenedor principal */
+.page-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: #f5f5f5;
+  padding: 20px;
+  box-sizing: border-box;
+}
+
+/* Caja general con sombra y borde */
 .form-box,
 .boxed-container {
   background-color: white;
@@ -11,13 +23,13 @@
   box-sizing: border-box;
 }
 
-/* Aplica box-sizing a todos los elementos */
+/* Todos los hijos deben heredar box-sizing para evitar errores de padding */
 .form-box *,
 .boxed-container * {
   box-sizing: border-box;
 }
 
-/* Inputs alineados perfectamente */
+/* Campos de entrada */
 .form-box input,
 .form-box textarea,
 .form-box select,
@@ -31,5 +43,36 @@
   border-radius: 8px;
   font-size: 16px;
   display: block;
-  box-sizing: border-box;
+}
+
+/* Botones uniformes */
+.form-box button,
+.boxed-container button {
+  width: 100%;
+  padding: 0.75rem;
+  margin-top: 1rem;
+  background-color: #5996bd;
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: background-color 0.3s ease;
+}
+
+/* Hover efecto */
+.form-box button:hover,
+.boxed-container button:hover {
+  background-color: #41749b;
+}
+
+/* Mensaje de éxito */
+.success-message {
+  background-color: #dff0d8;
+  color: #3c763d;
+  padding: 10px;
+  border-radius: 5px;
+  margin-bottom: 15px;
+  border: 1px solid #d6e9c6;
+  text-align: center;
 }
