@@ -33,20 +33,8 @@ function Login() {
     <div className="page-container">
       <h2>Iniciar Sesión</h2>
       <form className="form-box" onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Correo institucional"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
-          required
-        /><br/>
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={contrasena}
-          onChange={(e) => setContrasena(e.target.value)}
-          required
-        /><br/>
+        <input type="email" placeholder="Correo institucional" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
+        <input type="password" placeholder="Contraseña" value={contrasena} onChange={(e) => setContrasena(e.target.value)} required />
         <button type="submit">Ingresar</button>
       </form>
     </div>

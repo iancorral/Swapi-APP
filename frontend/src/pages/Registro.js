@@ -35,27 +35,9 @@ function Register() {
     <div className="page-container">
       <h2>Registro</h2>
       <form className="form-box" onSubmit={handleRegister}>
-        <input
-          type="text"
-          placeholder="Nombre"
-          value={nombre}
-          onChange={(e) => setNombre(e.target.value)}
-          required
-        />
-        <input
-          type="email"
-          placeholder="Correo institucional"
-          value={correo}
-          onChange={(e) => setCorreo(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="Contraseña"
-          value={contrasena}
-          onChange={(e) => setContrasena(e.target.value)}
-          required
-        />
+        <input type="text" placeholder="Nombre" value={nombre} onChange={(e) => setNombre(e.target.value)} required />
+        <input type="email" placeholder="Correo institucional" value={correo} onChange={(e) => setCorreo(e.target.value)} required />
+        <input type="password" placeholder="Contraseña" value={contrasena} onChange={(e) => setContrasena(e.target.value)} required />
         <button type="submit">Registrarse</button>
       </form>
     </div>

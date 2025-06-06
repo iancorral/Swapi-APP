@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { gql, useQuery } from '@apollo/client';
 import { useNavigate, useLocation } from 'react-router-dom';
-
+import '../styles/layout.css';
 
 const GET_ANUNCIOS = gql`
   query {
@@ -30,40 +30,33 @@ function Anuncios() {
   if (error) return <p>Error al cargar anuncios.</p>;
 
   return (
-    <div style={{ padding: '20px', position: 'relative' }}>
-      <h2>Lista de Anuncios</h2>
+    <div className="page-container">
+      <div className="boxed-container">
+        <h2>Lista de Anuncios</h2>
 
-      {/* Mensaje de éxito si venimos de crear */}
-      {location.state?.nuevo && (
-        <div style={{
-          backgroundColor: '#dff0d8',
-          color: '#3c763d',
-          padding: '10px',
-          borderRadius: '5px',
-          marginBottom: '15px',
-          border: '1px solid #d6e9c6'
-        }}>
-          ¡Anuncio creado exitosamente!
-        </div>
-      )}
+        {location.state?.nuevo && (
+          <div className="success-message">
+            ¡Anuncio creado exitosamente!
+          </div>
+        )}
 
-      <ul style={{ listStyle: 'none', padding: 0 }}>
-        {data.anuncios.map(anuncio => (
-          <li key={anuncio.id_anuncio} style={{
-            border: '1px solid #ccc',
-            borderRadius: '10px',
-            padding: '15px',
-            marginBottom: '10px',
-            boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
-          }}>
-            <h3>{anuncio.titulo}</h3>
-            <p>{anuncio.descripcion}</p>
-            <strong>Precio: ${anuncio.precio?.toFixed(2) || 'INFORMACIÓN'}</strong>
-          </li>
-        ))}
-      </ul>
+        <ul style={{ listStyle: 'none', padding: 0 }}>
+          {data.anuncios.map(anuncio => (
+            <li key={anuncio.id_anuncio} style={{
+              border: '1px solid #ccc',
+              borderRadius: '10px',
+              padding: '15px',
+              marginBottom: '10px',
+              boxShadow: '0 2px 4px rgba(0,0,0,0.1)'
+            }}>
+              <h3>{anuncio.titulo}</h3>
+              <p>{anuncio.descripcion}</p>
+              <strong>Precio: ${anuncio.precio?.toFixed(2) || 'INFORMACIÓN'}</strong>
+            </li>
+          ))}
+        </ul>
+      </div>
 
-      {/* Botón para crear publicación */}
       <button
         onClick={() => navigate('/crear-publicacion')}
         style={{
