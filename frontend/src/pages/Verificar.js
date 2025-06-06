@@ -38,8 +38,8 @@ function VerifyCode() {
 
   return (
     <div className="page-container">
-      <h2>Verificar Código</h2>
       <form className="form-box" onSubmit={handleVerificar}>
+        <h2>Verificar Código</h2>
         <input type="text" placeholder="Código de verificación" value={codigo} onChange={(e) => setCodigo(e.target.value)} required />
         <button type="submit">Verificar</button>
       </form>
