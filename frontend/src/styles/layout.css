@@ -1,50 +1,44 @@
+/* Centra completamente el contenido */
 .page-container {
   display: flex;
   flex-direction: column;
-  align-items: center;
   justify-content: center;
-  padding: 40px 20px;
-  min-height: 100vh;
-  background-color: #f9f9f9;
+  align-items: center;
+  height: 100vh; /* 100% de la altura de la pantalla */
+  background-color: #f5f5f5; /* Opcional: fondo claro */
 }
 
-.page-container h2 {
-  margin-bottom: 20px;
-  color: #333;
-}
-
-.page-container form {
-  background-color: #fff;
-  padding: 30px;
-  border-radius: 10px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+.form-box {
+  background-color: white;
+  padding: 2rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 100%;
   max-width: 400px;
 }
 
-.page-container input,
-.page-container textarea,
-.page-container select {
+input {
   width: 100%;
-  padding: 10px;
-  margin-bottom: 15px;
+  padding: 0.75rem;
+  margin: 0.5rem 0;
   border: 1px solid #ccc;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 8px;
 }
 
-.page-container button {
-  width: 100%;
-  padding: 12px;
-  background-color:  #5996bd;
+button {
+  padding: 0.75rem 1.5rem;
+  margin-top: 1rem;
+  background-color: #007bff;
   color: white;
   border: none;
-  border-radius: 6px;
-  font-size: 16px;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background-color 0.2s ease;
+  transition: background-color 0.3s ease;
 }
 
-.page-container button:hover {
-  background-color: #5996bd;
+button:hover {
+  background-color: #0056b3;
 }
