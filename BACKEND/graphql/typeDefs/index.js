@@ -21,12 +21,6 @@ const typeDefs = gql`
     id_categoria: Int!
   }
 
-  type Imagen {
-    id_imagen: ID!
-    url: String!
-    id_anuncio: Int!
-  }
-
   type UsuarioAnuncio {
     id_usuario: Int!
     nombre_usuario: String!
@@ -55,8 +49,6 @@ const typeDefs = gql`
     usuarios: [Usuario!]!
     categorias: [Categoria!]!
     anuncios: [Anuncio!]!
-    imagenes: [Imagen!]!
-    perfilUsuario: Usuario!
   }
 
   type Mutation {

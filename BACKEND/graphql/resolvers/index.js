@@ -10,7 +10,6 @@ const resolvers = {
     usuarios: async () => await db.select().table('usuarios'),
     categorias: async () => await db.select().table('categorias'),
     anuncios: async () => await db.select().table('anuncios'),
-    imagenes: async () => await db.select().table('imagenes'),
 
     sp_UsuAnu: async (_, { uid }, context) => {
       requireAuth(context);
@@ -25,11 +24,6 @@ const resolvers = {
       const result = await db.raw('CALL sp_CatAnu()');
       return result[0][0];
     },
-
-    perfilUsuario: async (_, __, context) => {
-      requireAuth(context);
-      return await db('usuarios').where({ id_usuario: context.user.id_usuario }).first();
-    },
   },
 
   Mutation: {
@@ -42,7 +36,8 @@ const resolvers = {
       if (existe) throw new Error('Ese correo ya está registrado');
 
       const hashedPassword = await bcrypt.hash(contrasena, 10);
-      const codigo = Math.floor(100000 + Math.random() * 900000).toString(); // PIN 6 dígitos
+      
+      const codigo = Math.floor(100000 + Math.random() * 900000).toString();
 
       const [id_usuario] = await db('usuarios').insert({
         nombre,

@@ -109,7 +109,6 @@ function CrearPublicacion() {
           style={{ ...inputStyle, resize: 'vertical' }}
         />
         <input
-          type="number"
           placeholder="Precio"
           value={precio}
           onChange={(e) => setPrecio(e.target.value)}

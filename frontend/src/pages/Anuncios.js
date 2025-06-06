@@ -19,11 +19,9 @@ function Anuncios() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Revalidar cuando venimos desde crear-publicacion
   useEffect(() => {
     if (location.state?.nuevo) {
       refetch();
-      // Limpiar estado para que no vuelva a activarse si navegamos dentro
       window.history.replaceState({}, document.title);
     }
   }, [location.state, refetch]);
@@ -60,7 +58,7 @@ function Anuncios() {
           }}>
             <h3>{anuncio.titulo}</h3>
             <p>{anuncio.descripcion}</p>
-            <strong>Precio: ${anuncio.precio?.toFixed(2) || 'Gratis'}</strong>
+            <strong>Precio: ${anuncio.precio?.toFixed(2) || 'INFORMACIÓN'}</strong>
           </li>
         ))}
       </ul>
